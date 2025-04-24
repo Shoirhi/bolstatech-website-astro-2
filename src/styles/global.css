@@ -121,7 +121,16 @@
     }
 
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground wrap-anywhere break-normal overscroll-none overflow-y-scroll;
+    }
+
+    body:has(dialog[open]) {
+        @apply overflow-hidden;
+    }
+
+    .site-wrapper:has(dialog[open]) {
+        @apply overflow-y-auto min-h-dvh;
+        scrollbar-gutter: stable;
     }
 }
 
@@ -130,59 +139,3 @@
     margin-inline: auto;
     padding-inline: clamp(1rem, -4.981rem + 12.48vw, 5rem);
 }
-/* 
-.prose h1 {
-    @apply scroll-m-20 text-std-28B-150 md:text-std-32B-150 tracking-tight;
-}
-
-.prose h2 {
-    @apply scroll-m-20 border-b pb-2 text-std-26B-150 md:text-std-28B-150 tracking-tight [&:not(:first-child)]:mt-10;
-}
-
-.prose h3 {
-    @apply scroll-m-20 text-std-24B-150 md:text-std-26B-150 tracking-tight [&:not(:first-child)]:mt-9;
-}
-
-.prose h4 {
-    @apply scroll-m-20 text-std-22B-150 md:text-std-24B-150 tracking-tight [&:not(:first-child)]:mt-8;
-}
-
-.prose h5 {
-    @apply scroll-m-20 text-std-20B-150 md:text-std-22B-150 tracking-tight [&:not(:first-child)]:mt-8;
-}
-
-.prose h6 {
-    @apply scroll-m-20 text-std-18B-160 md:text-std-20B-150 tracking-tight [&:not(:first-child)]:mt-8;
-}
-
-.prose p {
-    @apply text-std-16N-170 [&:not(:first-child)]:mt-6;
-}
-
-.prose blockquote {
-    @apply border-l-2 pl-6 [&:not(:first-child)]:mt-6;
-}
-
-.prose table {
-    @apply w-full [&:not(:first-child)]:mt-6 mb-6
-}
-
-.prose tr {
-    @apply border-t p-0 even:bg-muted;
-}
-
-.prose th {
-    @apply border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right;
-}
-
-.prose td {
-    @apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right
-}
-
-.prose ul {
-    @apply my-6 list-disc [&>li]:[&:not(:first-child)]:mt-2
-}
-
-.prose code {
-    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold
-} */

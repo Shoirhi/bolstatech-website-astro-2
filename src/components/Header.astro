@@ -1,7 +1,10 @@
 ---
 import { Logo } from "@/components/Logo";
+import { buttonVariants } from "@/components/ui/button";
 import { SITE_TITLE } from "@/consts";
 import { RiHome7Line } from "react-icons/ri";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { IoClose } from "react-icons/io5";
 import { cn, isPathMatching } from "@/lib/utils";
 
 interface Props {
@@ -28,7 +31,12 @@ const navItems = [
 ];
 ---
 
-<header class={cn("w-full top-0 bg-background/70 backdrop-blur-md border-b shadow", headerPosition)}>
+<header
+    class={cn(
+        "w-full top-0 bg-background/70 backdrop-blur-md border-b shadow",
+        headerPosition,
+    )}
+>
     <nav class="container grid grid-cols-[auto_1fr]">
         <a href="/" class="block py-3 lg:py-5 duration-300 hover:opacity-70">
             <Logo />
@@ -60,5 +68,74 @@ const navItems = [
                 ))
             }
         </ul>
+        <div class="lg:hidden flex items-center justify-end">
+            <dialog
+                aria-label="メニューモーダル"
+                class="w-full max-w-[20rem] mx-auto my-auto backdrop:bg-foreground/70 backdrop:backdrop-blur-sm p-4 rounded-lg"
+            >
+                <div class="w-full flex items-center justify-end">
+                    <button
+                        class={cn(buttonVariants({ variant: "ghost" }))}
+                        autofocus
+                    >
+                        <IoClose />
+                        閉じる
+                    </button>
+                </div>
+                <div class="mt-8">
+                    <ul>
+                        {
+                            navItems.map((item) => (
+                                <li>
+                                    <a
+                                        href={item.href}
+                                        class={cn(
+                                            "flex justify-start items-center gap-2 px-6 py-3 text-oln-14N-100 rounded duration-300",
+                                            isPathMatching(
+                                                Astro.url.pathname,
+                                                item.href,
+                                                item.strict,
+                                            )
+                                                ? "font-bold bg-muted"
+                                                : "hover:bg-muted/60",
+                                        )}
+                                    >
+                                        {item.icon && (
+                                            <item.icon className="w-4 h-4 mt-0.5" />
+                                        )}
+                                        {item.name}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+            </dialog>
+            <button class={cn(buttonVariants({ variant: "ghost" }))}>
+                <HiOutlineMenuAlt3 />
+                メニュー
+            </button>
+        </div>
     </nav>
 </header>
+
+<script is:inline>
+
+    function setupDialog () {
+        const dialog = document.querySelector("dialog");
+        const showButton = document.querySelector("dialog + button");
+        const closeButton = document.querySelector("dialog button");
+    
+        showButton.addEventListener("click", () => {
+            dialog.showModal();
+        });
+    
+        closeButton.addEventListener("click", () => {
+            dialog.close();
+        });
+    }
+
+    setupDialog();
+
+    document.addEventListener("astro:after-swap", () => setupDialog());
+</script>
