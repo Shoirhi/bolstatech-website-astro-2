@@ -12,14 +12,6 @@ export default defineConfig({
   site: "https://bolstatech.com",
   integrations: [sitemap(), react()],
 
-  experimental: {
-    fonts: [{
-      provider: fontProviders.google(),
-      name: "Noto Sans JP",
-      cssVariable: "--font-noto-sans-jp",
-    }]
-  },
-
   vite: {
     plugins: [tailwindcss()]
   }

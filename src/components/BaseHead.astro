@@ -1,7 +1,6 @@
 ---
 import "@/styles/global.css";
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
-import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -33,9 +32,6 @@ const displayTitle = title ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
     href={new URL("rss.xml", Astro.site)}
 />
 <meta name="generator" content={Astro.generator} />
-
-<!-- Font preloads -->
-<Font cssVariable="--font-noto-sans-jp" preload />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
