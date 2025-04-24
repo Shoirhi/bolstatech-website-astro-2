@@ -1,0 +1,64 @@
+---
+import { Logo } from "@/components/Logo";
+import { SITE_TITLE } from "@/consts";
+import { RiHome7Line } from "react-icons/ri";
+import { cn, isPathMatching } from "@/lib/utils";
+
+interface Props {
+    headerPosition?: "sticky" | "fixed";
+}
+
+const { headerPosition = "sticky" } = Astro.props;
+
+const navItems = [
+    {
+        name: "ホーム",
+        href: "/",
+        icon: RiHome7Line,
+        strict: true,
+    },
+    {
+        name: "テックブログ",
+        href: "/tech-blog",
+    },
+    {
+        name: "お問い合せ",
+        href: "/contact",
+    },
+];
+---
+
+<header class={cn("w-full top-0 bg-background/70 backdrop-blur-md border-b shadow", headerPosition)}>
+    <nav class="container grid grid-cols-[auto_1fr]">
+        <a href="/" class="block py-3 lg:py-5 duration-300 hover:opacity-70">
+            <Logo />
+            <span class="sr-only">{SITE_TITLE}</span>
+        </a>
+        <ul class="hidden lg:flex justify-end">
+            {
+                navItems.map((item) => (
+                    <li>
+                        <a
+                            href={item.href}
+                            class={cn(
+                                "px-5 flex justify-center items-center gap-2 relative h-full text-oln-14B-100 text-center duration-300 hover:bg-muted/70 before:content-[''] before:block before:absolute before:bottom-0 before:inset-x-0 before:w-full",
+                                isPathMatching(
+                                    Astro.url.pathname,
+                                    item.href,
+                                    item.strict,
+                                )
+                                    ? "before:h-1 before:bg-foreground/70"
+                                    : "before:h-0.5 before:duration-300 before:scale-y-0 before:origin-bottom hover:before:scale-y-100 before:bg-foreground/70",
+                            )}
+                        >
+                            {item.icon && (
+                                <item.icon className="w-4 h-4 mt-0.5" />
+                            )}
+                            {item.name}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+</header>

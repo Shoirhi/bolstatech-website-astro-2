@@ -1,0 +1,10 @@
+[
+    {
+        "id": "astro",
+        "name": "Astro"
+    },
+    {
+        "id": "tailwind-css",
+        "name": "Tailwind CSS"
+    }
+]
