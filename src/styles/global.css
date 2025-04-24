@@ -128,8 +128,12 @@
         @apply overflow-hidden;
     }
 
+    .site-wrapper {
+        @apply min-h-dvh;
+    }
+
     .site-wrapper:has(dialog[open]) {
-        @apply overflow-y-auto min-h-dvh;
+        @apply overflow-y-auto;
         scrollbar-gutter: stable;
     }
 }
