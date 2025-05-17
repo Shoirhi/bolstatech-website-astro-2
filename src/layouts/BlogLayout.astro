@@ -35,12 +35,13 @@ const title = currentCategory
 >
     <div class="container py-8">
         <h1 class="text-std-32B-150 md:text-std-36B-140">{title}</h1>
-        <div class="mt-6 flex items-center gap-1">
-            <label for="" class="text-lg font-bold">カテゴリ：</label>
+        <div class="mt-6 flex flex-wrap items-center gap-1">
+            <label for="" class="shrink-0 text-lg font-bold">カテゴリ：</label>
             <DropdownCategoriesMenu
                 basePath="/blog"
                 categories={categories}
-                currentCategory={currentCategory} 
+                currentCategory={currentCategory}
+                className="flex-1 sm:min-w-[180px] sm:max-w-[200px]"
                 client:only="react"
             />
         </div>
