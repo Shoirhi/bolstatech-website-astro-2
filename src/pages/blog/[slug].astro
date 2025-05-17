@@ -2,23 +2,21 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import "zenn-content-css";
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("techBlog");
+    const posts = await getCollection("blog");
     return posts.map((post) => ({
         params: { slug: post.id },
         props: post,
     }));
 }
 
-type Props = CollectionEntry<"techBlog">;
-
 const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout title={`${post.data.title} | テックブログ`} description={post.data.description}>
+<BaseLayout title={`${post.data.title}`} description={post.data.description}>
     <div class="container py-8">
         <article class="znc max-w-[40rem]">
             <h1>{post.data.title}</h1>

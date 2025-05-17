@@ -1,0 +1,36 @@
+---
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import type { GetStaticPathsOptions } from "astro";
+import { getCollection, getEntry } from "astro:content";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+    const blogCategories = await getCollection("blogCategories", ({ data }) => {
+        return data.isDraft !== true;
+    });
+
+    const blogPosts = (
+        await getCollection("blog", ({ data }) => {
+            return data.isDraft !== true;
+        })
+    ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+    return blogCategories.flatMap((category) => {
+        const filteredPosts = blogPosts.filter(
+            (post) => post.data.category?.id === category.id,
+        );
+        return paginate(filteredPosts, {
+            params: {
+                categoryId: category.id,
+            },
+            pageSize: 12,
+        });
+    });
+}
+
+const { page } = Astro.props
+const { categoryId } = Astro.params;
+
+const currentCategory = await getEntry("blogCategories", categoryId);
+---
+
+<BlogLayout page={page} currentCategory={currentCategory} />

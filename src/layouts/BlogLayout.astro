@@ -1,0 +1,94 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
+import DropdownCategoriesMenu from "@/components/DropdownCategoriesMenu";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination";
+import { SITE_TITLE } from "@/consts";
+import { type CollectionEntry, getCollection } from "astro:content";
+import type { Page } from "astro";
+
+interface Props {
+    currentCategory?: CollectionEntry<"blogCategories">;
+    page: Page;
+}
+
+const { currentCategory, page } = Astro.props;
+
+const categories = await getCollection("blogCategories", ({ data }) => {
+    return data.isDraft !== true;
+});
+
+const title = currentCategory
+    ? `${currentCategory.data.name}に関する記事`
+    : "すべての記事";
+---
+
+<BaseLayout
+    title={`${title} - ブログ`}
+    description={`${SITE_TITLE}で公開されている${title}の一覧です。`}
+>
+    <div class="container py-8">
+        <h1 class="text-std-32B-150 md:text-std-36B-140">{title}</h1>
+        <div class="mt-6 flex items-center gap-1">
+            <label for="" class="text-lg font-bold">カテゴリ：</label>
+            <DropdownCategoriesMenu
+                basePath="/blog"
+                categories={categories}
+                currentCategory={currentCategory} 
+                client:only="react"
+            />
+        </div>
+        {
+            page.data.length ? (
+                <>
+                    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
+                        {page.data.map((post) => (
+                            <li>
+                                <a
+                                    href={`/blog/${post.id}/`}
+                                    class="block px-4 py-3 border rounded-lg"
+                                >
+                                    <p>{post.data.title}</p>
+                                    <FormattedDate date={post.data.pubDate} />
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                    {page.lastPage > 1 && (
+                        <Pagination className="mt-12">
+                            <PaginationContent className="grid grid-cols-3 [&>*]:place-self-center">
+                                {page.url.prev && (
+                                    <PaginationItem className="col-start-1">
+                                        <PaginationPrevious
+                                            href={page.url.prev}
+                                        />
+                                    </PaginationItem>
+                                )}
+                                <PaginationItem className="col-start-2">
+                                    {page.currentPage} / {page.lastPage}
+                                </PaginationItem>
+                                {page.url.next && (
+                                    <PaginationItem className="cols-start-3">
+                                        <PaginationNext href={page.url.next} />
+                                    </PaginationItem>
+                                )}
+                            </PaginationContent>
+                        </Pagination>
+                    )}
+                </>
+            ) : (
+                <p class="text-center text-std-16B-100 mt-8">
+                    {currentCategory
+                        ? `${currentCategory.data.name}に関する記事はまだありません。`
+                        : "まだ記事はありません。"}
+                </p>
+            )
+        }
+    </div>
+</BaseLayout>

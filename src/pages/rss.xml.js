@@ -1,6 +1,6 @@
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
 import rss from "@astrojs/rss";
-import { getEntry, getEntries, getCollection } from "astro:content";
+import { getEntry, getCollection } from "astro:content";
 
 export async function GET(context) {
 	const posts = (
@@ -19,7 +19,7 @@ export async function GET(context) {
 			pubDate: post.data.pubDate,
 			description: post.data.description,
 			content: post.body,
-			categories: post.data.categories && (await getEntries(post.data.categories)).map((category) => (category.data.name)),
+			category: post.data.category && (await getEntry(post.data.category)).data.name,
 			author: post.data.author && (await getEntry(post.data.author)).data.name,
 		}))),
 	});
