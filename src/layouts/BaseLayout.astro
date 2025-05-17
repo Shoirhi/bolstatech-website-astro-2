@@ -19,12 +19,10 @@ const { title, description, image, headerPosition } = Astro.props;
         <BaseHead title={title} description={description} image={image} />
     </head>
     <body>
-        <div class="site-wrapper">
-            <Header headerPosition={headerPosition} />
-            <main>
-                <slot />
-            </main>
-            <Footer />
-        </div>
+        <Header headerPosition={headerPosition} />
+        <main>
+            <slot />
+        </main>
+        <Footer />
     </body>
 </html>

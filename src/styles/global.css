@@ -117,20 +117,7 @@
     }
 
     body {
-        @apply bg-background text-foreground wrap-anywhere break-normal overscroll-none overflow-y-scroll;
-    }
-
-    body:has(dialog[open]) {
-        @apply overflow-hidden;
-    }
-
-    .site-wrapper {
-        @apply min-h-dvh;
-    }
-
-    .site-wrapper:has(dialog[open]) {
-        @apply overflow-y-auto;
-        scrollbar-gutter: stable;
+        @apply bg-background text-foreground min-h-dvh wrap-anywhere break-normal overscroll-none;
     }
 }
 

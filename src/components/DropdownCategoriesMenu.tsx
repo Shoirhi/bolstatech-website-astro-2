@@ -10,10 +10,17 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronDown, CircleSmall } from "lucide-react";
 
+interface CategoryItem {
+    id: string;
+    data: {
+        name: string;
+    }
+}
+
 export default function DropdownCategoriesMenu({ basePath, categories, currentCategory, className }: {
     basePath: string;
-    categories: any[];
-    currentCategory?: any;
+    categories: CategoryItem[];
+    currentCategory?: CategoryItem; 
     className?: string;
 }) {
 
@@ -42,7 +49,7 @@ export default function DropdownCategoriesMenu({ basePath, categories, currentCa
     return (
         <div className={cn(className)}>
             <DropdownMenu>
-                <DropdownMenuTrigger asChild className="group cursor-pointer w-full justify-between">
+                <DropdownMenuTrigger id="dropdown-categories-menu" asChild className="group cursor-pointer w-full justify-between">
                     <Button variant="outline" size="lg">{currentCategory?.data.name || "すべての記事"}<ChevronDown className="group-data-[state=open]:rotate-180 transition-transform" /></Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
