@@ -20,6 +20,18 @@ const {
 const displayTitle = title ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
 ---
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-282WN71W9J" type="text/partytown" is:inline />
+<script type="text/partytown" is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-282WN71W9J");
+</script>
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
