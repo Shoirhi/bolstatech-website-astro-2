@@ -1,70 +1,114 @@
 ---
 import { Logo } from "@/components/Logo";
-import HeaderDrawer from "@/components/HeaderDrawer";
+import SnsButtons from "@/components/SnsButtons.astro";
+import { buttonVariants } from "@/components/ui/button";
 import { SITE_TITLE } from "@/consts";
-import { cn, isPathMatching } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+import { Image } from "astro:assets";
+import PersonalIcon from "@/assets/personal-icon-512x512.png"
 
 interface Props {
-    headerPosition?: "sticky" | "fixed";
+  headerPosition?: "sticky" | "fixed";
 }
 
 const { headerPosition = "sticky" } = Astro.props;
 
 const navItems = [
-    {
-        name: "ホーム",
-        href: "/",
-        strict: true,
-    },
-    {
-        name: "ブログ",
-        href: "/blog",
-    },
-    {
-        name: "お問い合せ",
-        href: "/contact",
-    },
+  {
+    name: "ホーム",
+    href: "/",
+    strict: true,
+  },
+  // {
+  //   name: "ブログ",
+  //   href: "/blog",
+  // },
+  // {
+  //   name: "お問い合せ",
+  //   href: "/contact",
+  // },
 ];
 ---
 
 <header
-    class={cn(
-        "w-full top-0 bg-background/70 backdrop-blur-md border-b shadow",
-        headerPosition,
-    )}
+  class={cn(
+    "w-full top-0 z-50 bg-background/70 backdrop-blur-md border-b shadow",
+    headerPosition,
+  )}
 >
-    <nav class="container grid grid-cols-[auto_1fr]">
-        <a href="/" class="block py-3 lg:py-5 duration-300 hover:opacity-70">
-            <Logo />
-            <span class="sr-only">{SITE_TITLE}</span>
-        </a>
-        <ul class="hidden lg:flex justify-end">
-            {
-                navItems.map((item) => (
-                    <li>
-                        <a
-                            href={item.href}
-                            class={cn(
-                                "px-5 flex justify-center items-center gap-2 relative h-full text-oln-14B-100 text-center duration-300 hover:bg-muted/70 before:content-[''] before:block before:absolute before:bottom-0 before:inset-x-0 before:w-full",
-                                isPathMatching(
-                                    Astro.url.pathname,
-                                    item.href,
-                                    item.strict,
-                                ) && "before:h-0.5 before:bg-foreground/70",
-                            )}
-                        >
-                            {item.name}
-                        </a>
-                    </li>
-                ))
-            }
+  <nav class="container grid grid-cols-[1fr_auto_1fr] items-center h-15">
+    <a href="/" class="grid grid-cols-[auto_1fr] items-center gap-x-3 duration-300 hover:opacity-70">
+      <Image class="w-auto h-11" src={PersonalIcon} alt="" />
+      <span class="text-lg sm:text-xl font-medium leading-[1.2]">{SITE_TITLE}</span>
+    </a>
+    <div class="justify-self-center">
+      <div class="hidden lg:block">
+        <ul class="flex justify-center items-center gap-1">
+          {
+            navItems.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class={buttonVariants({ variant: "ghost" })}
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))
+          }
         </ul>
-        <div class="lg:hidden flex items-center justify-end">
-            <HeaderDrawer
-                navItems={navItems}
-                currentPath={Astro.url.pathname}
-                client:only="react"
-            />
-        </div>
-    </nav>
+      </div>
+    </div>
+    <div class="justify-self-end">
+      <div class="lg:hidden">
+        <details id="mobileMenu" class="group">
+          <summary
+            class={cn(buttonVariants({ variant: "ghost" }), "uppercase")}
+          >
+            <div class="relative size-4">
+              <span
+                class="bg-foreground absolute left-0 block h-0.5 rounded-full w-4 transition-all duration-200 top-1 group-open:top-[0.4rem] group-open:-rotate-45"
+              ></span><span
+                class="bg-foreground absolute left-0 block h-0.5 rounded-full w-4 transition-all duration-200 top-2.5 group-open:top-[0.4rem] group-open:rotate-45"
+              ></span>
+            </div>
+            Menu
+          </summary>
+          <div
+            class="absolute bg-background z-50 w-full inset-x-0 h-[calc(100dvh-3.75rem)] top-15"
+          >
+            <div class="container py-4 grid gap-4">
+              <ul class="flex flex-col gap-1 w-full">
+                {
+                  navItems.map((item) => (
+                    <li>
+                      <a
+                        href={item.href}
+                        class={cn(
+                          buttonVariants({ variant: "ghost" }),
+                          "w-full justify-start px-3",
+                        )}
+                      >
+                        {item.name}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+              <SnsButtons />
+            </div>
+          </div>
+        </details>
+      </div>
+      <div class="hidden lg:block">
+        <SnsButtons />
+      </div>
+    </div>
+  </nav>
 </header>
+
+<style>
+  body:has(details#mobileMenu[open]) {
+    overflow: hidden;
+  }
+</style>

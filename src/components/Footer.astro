@@ -1,9 +1,13 @@
 ---
+import SnsButtons from "@/components/SnsButtons.astro";
 import { SITE_TITLE } from "@/consts";
 ---
 
-<footer class="sticky top-full border-t">
+<footer class="sticky top-full border-t py-3">
     <div class="container">
-        <p class="text-center py-3 text-dns-14N-120">&copy; {new Date().getFullYear()} {SITE_TITLE}</p>
+        <div class="grid place-content-center">
+            <SnsButtons />
+        </div>
+        <p class="text-center text-sm mt-3">&copy; {new Date().getFullYear()} {SITE_TITLE}</p>
     </div>
 </footer>

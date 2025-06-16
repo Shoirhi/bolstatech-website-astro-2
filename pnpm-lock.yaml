@@ -20,9 +20,6 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.4.1
         version: 3.4.1
-      '@digital-go-jp/tailwind-theme-plugin':
-        specifier: ^0.2.5
-        version: 0.2.5(tailwindcss@4.1.4)
       '@radix-ui/react-dialog':
         specifier: ^1.1.13
         version: 1.1.13(@types/react-dom@19.1.2(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -227,12 +224,6 @@ packages:
 
   '@capsizecss/unpack@2.4.0':
     resolution: {integrity: sha512-GrSU71meACqcmIUxPYOJvGKF0yryjN/L1aCuE9DViCTJI7bfkjgYDPD1zbNDcINJwSSP6UaBZY9GAbYDO7re0Q==}
-
-  '@digital-go-jp/tailwind-theme-plugin@0.2.5':
-    resolution: {integrity: sha512-hQXFEReSJjIZOq0jy5E1IPxpi9uVP2nNi8VfXIdrsGG2f53dEWApLBub8iNzFW0LtrmCzR1N3bWDI8zgbNya7A==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      tailwindcss: ^3.4.17 || ^4.0.0
 
   '@emmetio/abbreviation@2.3.3':
     resolution: {integrity: sha512-mgv58UrU3rh4YgbE/TzgLQwJ3pFsHHhCLqY20aJq+9comytTXUDNGG/SMtSeMJdkpxgXSXunBGLD8Boka3JyVA==}
@@ -2905,10 +2896,6 @@ snapshots:
       fontkit: 2.0.4
     transitivePeerDependencies:
       - encoding
-
-  '@digital-go-jp/tailwind-theme-plugin@0.2.5(tailwindcss@4.1.4)':
-    dependencies:
-      tailwindcss: 4.1.4
 
   '@emmetio/abbreviation@2.3.3':
     dependencies:

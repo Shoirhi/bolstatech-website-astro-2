@@ -2,7 +2,6 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-@plugin "@digital-go-jp/tailwind-theme-plugin";
 
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
@@ -116,8 +115,12 @@
         @apply border-border outline-ring/50;
     }
 
+    html {
+        @apply scroll-smooth;
+    }
+
     body {
-        @apply bg-background text-foreground min-h-dvh wrap-anywhere break-normal overscroll-none;
+        @apply bg-background text-foreground min-h-dvh wrap-anywhere break-normal overscroll-none overflow-x-hidden;
     }
 }
 

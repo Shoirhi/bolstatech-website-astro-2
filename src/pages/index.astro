@@ -1,28 +1,9 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import RotatingText from "@/components/RotatingText";
 ---
 
 <BaseLayout headerPosition="fixed">
-	<div class="container py-8 min-h-dvh grid place-content-center">
-		<h1 class="sr-only">
-			ミニマルで、便利で、リッチで、サクサクなWebサイトを作っています
-		</h1>
-		<div class="grid place-content-center gap-4">
-			<RotatingText
-				texts={["ミニマル", "便利", "リッチ", "サクサク"]}
-				mainClassName="w-fit mx-auto px-6 py-2 rounded-2xl bg-muted text-std-36N-140 md:text-dsp-57N-140 font-medium shadow-sm"
-				staggerFrom={"last"}
-				initial={{ y: "100%" }}
-				animate={{ y: 0 }}
-				exit={{ y: "-120%" }}
-				staggerDuration={0.025}
-				splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-				transition={{ type: "spring", damping: 30, stiffness: 400 }}
-				rotationInterval={2000}
-				client:only="react"
-			/>
-			<p class="text-std-36N-140 md:text-dsp-57N-140 text-center">なWebサイトを<span class="inline-block">作っています</span></p>
-		</div>
+	<div class="container">
+		<h1 class="sr-only">ボルスタテック</h1>
 	</div>
 </BaseLayout>

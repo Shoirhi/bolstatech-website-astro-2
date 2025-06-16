@@ -1,0 +1,42 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { X_URL, GITHUB_URL } from "@/consts";
+import { FaXTwitter, FaGithub } from "react-icons/fa6";
+
+const snsButtonItems = [
+    {
+        name: "X（Twitter）",
+        url: X_URL,
+        icon: FaXTwitter,
+    },
+    {
+        name: "GitHub",
+        url: GITHUB_URL,
+        icon: FaGithub,
+    },
+];
+---
+
+<ul class="flex items-center gap-1">
+    {
+        snsButtonItems.map((item) => {
+            const Icon = item.icon;
+            return (
+                <li>
+                    <a
+                        href={item.url}
+                        class={buttonVariants({
+                            variant: "ghost",
+                            size: "icon",
+                        })}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span class="sr-only">{item.name}</span>
+                        <Icon />
+                    </a>
+                </li>
+            );
+        })
+    }
+</ul>

@@ -34,7 +34,7 @@ const title = currentCategory
     description={`${SITE_TITLE}で公開されている${title}の一覧です。`}
 >
     <div class="container py-8">
-        <h1 class="text-std-32B-150 md:text-std-36B-140">{title}</h1>
+        <h1 class="text-lg md:text-xl">{title}</h1>
         <div class="mt-6 flex flex-wrap items-center gap-1">
             <label for="dropdown-categories-menu" class="shrink-0 text-lg font-bold">カテゴリ：</label>
             <DropdownCategoriesMenu
@@ -84,7 +84,7 @@ const title = currentCategory
                     )}
                 </>
             ) : (
-                <p class="text-center text-std-16B-100 mt-8">
+                <p class="text-center mt-8">
                     {currentCategory
                         ? `${currentCategory.data.name}に関する記事はまだありません。`
                         : "まだ記事はありません。"}
