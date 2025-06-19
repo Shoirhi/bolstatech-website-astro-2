@@ -53,9 +53,6 @@ importers:
       framer-motion:
         specifier: ^12.8.0
         version: 12.8.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      kiso.css:
-        specifier: ^1.1.6
-        version: 1.1.6
       lucide-react:
         specifier: ^0.503.0
         version: 0.503.0(react@19.1.0)
@@ -1778,9 +1775,6 @@ packages:
 
   jsonc-parser@3.3.1:
     resolution: {integrity: sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ==}
-
-  kiso.css@1.1.6:
-    resolution: {integrity: sha512-YUWQar9/Y00P1GgmpngNcXEJmLGKZW8QIHcthsoS5X53us53sW4Uu208WWWZq0JlpPRdTcJ/8MRUWO7lr8kk+Q==}
 
   kleur@3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
@@ -4517,8 +4511,6 @@ snapshots:
   jsonc-parser@2.3.1: {}
 
   jsonc-parser@3.3.1: {}
-
-  kiso.css@1.1.6: {}
 
   kleur@3.0.3: {}
 

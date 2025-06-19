@@ -1,7 +1,6 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageLayout from "@/layouts/PageLayout.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
-import DropdownCategoriesMenu from "@/components/DropdownCategoriesMenu";
 import {
     Pagination,
     PaginationContent,
@@ -29,26 +28,15 @@ const title = currentCategory
     : "すべての記事";
 ---
 
-<BaseLayout
+<PageLayout
     title={`${title} - ブログ`}
     description={`${SITE_TITLE}で公開されている${title}の一覧です。`}
 >
     <div class="container py-8">
-        <h1 class="text-lg md:text-xl">{title}</h1>
-        <div class="mt-6 flex flex-wrap items-center gap-1">
-            <label for="dropdown-categories-menu" class="shrink-0 text-lg font-bold">カテゴリ：</label>
-            <DropdownCategoriesMenu
-                basePath="/blog"
-                categories={categories}
-                currentCategory={currentCategory}
-                className="flex-1 sm:min-w-[180px] sm:max-w-[200px]"
-                client:only="react"
-            />
-        </div>
         {
             page.data.length ? (
                 <>
-                    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
+                    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                         {page.data.map((post) => (
                             <li>
                                 <a
@@ -92,4 +80,4 @@ const title = currentCategory
             )
         }
     </div>
-</BaseLayout>
+</PageLayout>

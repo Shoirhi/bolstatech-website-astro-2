@@ -18,10 +18,10 @@ const navItems = [
     href: "/",
     strict: true,
   },
-  // {
-  //   name: "ブログ",
-  //   href: "/blog",
-  // },
+  {
+    name: "ブログ",
+    href: "/blog",
+  },
   // {
   //   name: "お問い合せ",
   //   href: "/contact",
@@ -37,8 +37,8 @@ const navItems = [
       href="/"
       class="grid grid-cols-[auto_1fr] items-center gap-x-3 duration-300 hover:opacity-70"
     >
-      <Image class="w-8" src={PersonalIcon} alt="" />
-      <span class="text-lg sm:text-xl font-medium leading-[1.2]"
+      <Image class="w-auto h-11" src={PersonalIcon} alt="" />
+      <span class="font-medium text-[clamp(1rem,0.886rem+0.48dvw,1.25rem)]/[1.2]"
         >{SITE_TITLE}</span
       >
     </a>

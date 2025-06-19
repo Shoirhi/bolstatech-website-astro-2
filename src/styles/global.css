@@ -1,7 +1,4 @@
-@import "kiso.css";
-@layer theme, base, components, utilities;
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -124,6 +121,53 @@
 
     body {
         @apply bg-background text-foreground min-h-dvh wrap-anywhere break-normal overscroll-none overflow-x-hidden;
+    }
+
+    :where(:root) {
+        /* Remove space when punctuation marks are adjacent, and also remove leading spaces in a line. */
+        text-spacing-trim: trim-start;
+
+        /* Improves readability by inserting a small space between Japanese and alphanumeric characters. */
+        text-autospace: normal;
+
+        /* Prevents misreading by applying strict line-breaking rules. */
+        line-break: strict;
+    }
+
+    :where(em:lang(ja)) {
+        /* In Japanese, emphasis is commonly represented by bold text, so `font-weight: bolder;` is set by default. */
+        font-weight: bolder;
+    }
+
+    :where(:is(i, cite, em, dfn, var):lang(ja)) {
+        /* Italic style is not common in Japanese, so the `font-style` is reset. */
+        font-style: unset;
+    }
+
+    :where(:root) {
+        /* Prevents layout shift caused by the appearance or disappearance of the scrollbar. */
+        scrollbar-gutter: stable;
+    }
+
+    :where(button, [type="button"], [type="submit"], [type="reset"]),
+    ::file-selector-button {
+        /*
+        * On iOS, double-tapping a button can cause zooming, which harms usability.
+        * `touch-action: manipulation` is specified to disable zooming on double-tap.
+        */
+        touch-action: manipulation;
+    }
+
+    :where(dialog, [popover]) {
+        /*
+        * When these fixed-position elements are scrolled, preventing scroll chaining on the underlying page and bounce effects on mobile improves usability.
+        * Disabling block-direction scroll chaining is recommended.
+        */
+        overscroll-behavior-block: contain;
+    }
+
+    :root:has(:modal) {
+        overflow: hidden;
     }
 }
 
