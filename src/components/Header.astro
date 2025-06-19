@@ -4,7 +4,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { SITE_TITLE } from "@/consts";
 import { cn } from "@/lib/utils";
 import { Image } from "astro:assets";
-import PersonalIcon from "@/assets/personal-icon-512x512.png"
+import PersonalIcon from "@/assets/personal-icon-512x512.png";
 
 interface Props {
   headerPosition?: "sticky" | "fixed";
@@ -30,15 +30,17 @@ const navItems = [
 ---
 
 <header
-  class={cn(
-    "w-full top-0 z-50 bg-background/70 backdrop-blur-md border-b shadow",
-    headerPosition,
-  )}
+  class={cn("w-full top-0 z-50 bg-background border-b shadow", headerPosition)}
 >
   <nav class="container grid grid-cols-[1fr_auto_1fr] items-center h-15">
-    <a href="/" class="grid grid-cols-[auto_1fr] items-center gap-x-3 duration-300 hover:opacity-70">
+    <a
+      href="/"
+      class="grid grid-cols-[auto_1fr] items-center gap-x-3 duration-300 hover:opacity-70"
+    >
       <Image class="w-8" src={PersonalIcon} alt="" />
-      <span class="text-lg sm:text-xl font-medium leading-[1.2]">{SITE_TITLE}</span>
+      <span class="text-lg sm:text-xl font-medium leading-[1.2]"
+        >{SITE_TITLE}</span
+      >
     </a>
     <div class="justify-self-center">
       <div class="hidden lg:block">
@@ -109,5 +111,18 @@ const navItems = [
 <style>
   body:has(details#mobileMenu[open]) {
     overflow: hidden;
+  }
+
+  details#mobileMenu {
+    &::details-content {
+      @media (prefers-reduced-motion: no-preference) {
+        transition-duration: 300ms;
+        transition-property: content-visibility, opacity;
+        transition-behavior: allow-discrete;
+      }
+    }
+    &:not([open])::details-content {
+      opacity: 0;
+    }
   }
 </style>
