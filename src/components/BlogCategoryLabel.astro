@@ -1,0 +1,15 @@
+---
+import { Folder } from "lucide-react";
+
+interface Props {
+    name: string;
+    transitionName?: string;
+}
+
+const { name, transitionName } = Astro.props;
+---
+
+<div transition:name={transitionName} class="flex items-center gap-1.5">
+    <Folder className="w-4 h-4" />
+    {name}
+</div>

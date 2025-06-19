@@ -1,0 +1,17 @@
+---
+import FormattedDate from "@/components/FormattedDate.astro";
+import { ClockArrowUp } from "lucide-react";
+
+export interface Props {
+    date: Date;
+    transitionName?: string;
+}
+
+const { date, transitionName } = Astro.props;
+---
+
+<div transition:name={transitionName} class="flex items-center gap-1.5">
+    <ClockArrowUp className="w-4 h-4" /><FormattedDate
+        date={date}
+    />
+</div>

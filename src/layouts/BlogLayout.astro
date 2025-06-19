@@ -1,6 +1,5 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
-import FormattedDate from "@/components/FormattedDate.astro";
 import {
     Pagination,
     PaginationContent,
@@ -8,9 +7,12 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
+import BlogCategoryLabel from "@/components/BlogCategoryLabel.astro";
+import BlogUploadedLabel from "@/components/BlogUploadedLabel.astro";
 import { SITE_TITLE } from "@/consts";
 import { type CollectionEntry, getCollection } from "astro:content";
 import type { Page } from "astro";
+import { getEntry } from "astro:content";
 
 interface Props {
     currentCategory?: CollectionEntry<"blogCategories">;
@@ -43,8 +45,26 @@ const title = currentCategory
                                     href={`/blog/${post.id}/`}
                                     class="block px-4 py-3 border rounded-lg"
                                 >
-                                    <p>{post.data.title}</p>
-                                    <FormattedDate date={post.data.pubDate} />
+                                    <p transition:name={`blogTitle-${post.id}`}>{post.data.title}</p>
+                                    <div class="mt-4 text-sm text-muted-foreground flex items-center gap-x-4 gap-y-1 flex-wrap">
+                                        <BlogUploadedLabel
+                                            transitionName={`blogUploaded-${post.id}`}
+                                            date={post.data.pubDate}
+                                        />
+                                        {post.data.category && (
+                                            <BlogCategoryLabel
+                                                transitionName={`blogCategory-${post.id}`}
+                                                name={
+                                                    categories.find(
+                                                        (category) =>
+                                                            category.id ===
+                                                            post.data.category
+                                                                .id,
+                                                    )?.data.name || "未分類"
+                                                }
+                                            />
+                                        )}
+                                    </div>
                                 </a>
                             </li>
                         ))}
