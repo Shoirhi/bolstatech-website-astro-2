@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/pagination";
 import BlogCategoryLabel from "@/components/BlogCategoryLabel.astro";
 import BlogUploadedLabel from "@/components/BlogUploadedLabel.astro";
+import BlogList from "@/components/BlogList.astro";
 import { SITE_TITLE } from "@/consts";
 import { type CollectionEntry, getCollection } from "astro:content";
 import type { Page } from "astro";
@@ -35,69 +36,6 @@ const title = currentCategory
     description={`${SITE_TITLE}で公開されている${title}の一覧です。`}
 >
     <div class="container py-8">
-        {
-            page.data.length ? (
-                <>
-                    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {page.data.map((post) => (
-                            <li>
-                                <a
-                                    href={`/blog/${post.id}/`}
-                                    class="block px-4 py-3 border rounded-lg"
-                                >
-                                    <p transition:name={`blogTitle-${post.id}`}>{post.data.title}</p>
-                                    <div class="mt-4 text-sm text-muted-foreground flex items-center gap-x-4 gap-y-1 flex-wrap">
-                                        <BlogUploadedLabel
-                                            transitionName={`blogUploaded-${post.id}`}
-                                            date={post.data.pubDate}
-                                        />
-                                        {post.data.category && (
-                                            <BlogCategoryLabel
-                                                transitionName={`blogCategory-${post.id}`}
-                                                name={
-                                                    categories.find(
-                                                        (category) =>
-                                                            category.id ===
-                                                            post.data.category
-                                                                .id,
-                                                    )?.data.name || "未分類"
-                                                }
-                                            />
-                                        )}
-                                    </div>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                    {page.lastPage > 1 && (
-                        <Pagination className="mt-12">
-                            <PaginationContent className="grid grid-cols-3 [&>*]:place-self-center">
-                                {page.url.prev && (
-                                    <PaginationItem className="col-start-1">
-                                        <PaginationPrevious
-                                            href={page.url.prev}
-                                        />
-                                    </PaginationItem>
-                                )}
-                                <PaginationItem className="col-start-2">
-                                    {page.currentPage} / {page.lastPage}
-                                </PaginationItem>
-                                {page.url.next && (
-                                    <PaginationItem className="cols-start-3">
-                                        <PaginationNext href={page.url.next} />
-                                    </PaginationItem>
-                                )}
-                            </PaginationContent>
-                        </Pagination>
-                    )}
-                </>
-            ) : (
-                <p class="text-center mt-8">
-                    {currentCategory
-                        ? `${currentCategory.data.name}に関する記事はまだありません。`
-                        : "まだ記事はありません。"}
-                </p>
-            )
-        }
+        <BlogList posts={page.data} categories={categories} pagination={page} />
     </div>
 </PageLayout>

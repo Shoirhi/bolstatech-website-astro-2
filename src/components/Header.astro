@@ -3,7 +3,7 @@ import SnsButtons from "@/components/SnsButtons.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { SITE_TITLE } from "@/consts";
 import { cn } from "@/lib/utils";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import PersonalIcon from "@/assets/personal-icon-512x512.png";
 
 interface Props {
@@ -37,7 +37,7 @@ const navItems = [
       href="/"
       class="grid grid-cols-[auto_1fr] items-center gap-x-3 duration-300 hover:opacity-70"
     >
-      <Image class="w-auto h-11" src={PersonalIcon} alt="" />
+      <Picture formats={['avif']} class="w-auto h-11" src={PersonalIcon} alt="" />
       <span class="font-medium text-[clamp(1rem,0.886rem+0.48dvw,1.25rem)]/[1.2]"
         >{SITE_TITLE}</span
       >

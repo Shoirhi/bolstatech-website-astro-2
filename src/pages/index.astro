@@ -1,9 +1,28 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlogList from "@/components/BlogList.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { getCollection } from "astro:content";
+
+const blogPosts = (
+	await getCollection("blog", ({ data }) => {
+		return data.isDraft !== true;
+	})
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+.slice(0, 12);
+
+const categories = await getCollection("blogCategories", ({ data }) => {
+	return data.isDraft !== true;
+});
 ---
 
-<BaseLayout headerPosition="fixed">
-	<div class="container">
-		<h1 class="sr-only">ボルスタテック</h1>
+<BaseLayout>
+	<div class="container py-10">
+		<h1 class="sr-only">BOLSTA TECH</h1>
+		<h2 class="font-bold text-[clamp(1.25rem,1.159rem+0.45dvw,1.5rem)] mb-6">最新のブログ記事</h2>
+		<BlogList posts={blogPosts} categories={categories} />
+		<div class="mt-8">
+			<a href="/blog/" class={buttonVariants({ variant: "secondary", size: "lg" })}>すべての記事を見る</a>
+		</div>
 	</div>
 </BaseLayout>

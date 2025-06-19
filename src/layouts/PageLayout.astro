@@ -40,7 +40,7 @@ const { title, description, parentPages } = Astro.props;
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>
-        <h1 class="mt-6 font-bold [--clamp-min:20] [--clamp-max:28]">{title}</h1>
+        <h1 class="mt-6 font-bold text-[clamp(1.25rem,1.159rem+0.45dvw,1.5rem)]">{title}</h1>
     </div>
     <slot />
 </BaseLayout>
