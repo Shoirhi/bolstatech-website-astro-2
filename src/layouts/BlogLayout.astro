@@ -1,19 +1,9 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
-import {
-    Pagination,
-    PaginationContent,
-    PaginationItem,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination";
-import BlogCategoryLabel from "@/components/BlogCategoryLabel.astro";
-import BlogUploadedLabel from "@/components/BlogUploadedLabel.astro";
 import BlogList from "@/components/BlogList.astro";
 import { SITE_TITLE } from "@/consts";
 import { type CollectionEntry, getCollection } from "astro:content";
 import type { Page } from "astro";
-import { getEntry } from "astro:content";
 
 interface Props {
     currentCategory?: CollectionEntry<"blogCategories">;

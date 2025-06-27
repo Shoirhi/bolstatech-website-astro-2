@@ -1,10 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import FormattedDate from "@/components/FormattedDate.astro";
 import BlogUploadedLabel from "@/components/BlogUploadedLabel.astro";
 import BlogCategoryLabel from "@/components/BlogCategoryLabel.astro";
 import { getCollection, getEntry, render } from "astro:content";
-import { ClockArrowUp, Folder } from "lucide-react";
 import "zenn-content-css";
 
 export async function getStaticPaths() {

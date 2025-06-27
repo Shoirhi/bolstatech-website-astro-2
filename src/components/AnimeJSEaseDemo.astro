@@ -1,0 +1,91 @@
+---
+const easeItems = [
+    "linear",
+    "linear(0, .5 75%, 1)",
+    "irregular(10, 1)",
+    "steps(10)",
+    "cubicBezier(.5,0,.5,1)",
+    "in",
+    "in(3.35)",
+    "out",
+    "out(3.35)",
+    "inOut",
+    "inOut(3.35)",
+    "inQuad",
+    "outQuad",
+    "inOutQuad",
+    "inCubic",
+    "outCubic",
+    "inOutCubic",
+    "inQuart",
+    "outQuart",
+    "inOutQuart",
+    "inSine",
+    "outSine",
+    "inOutSine",
+    "inCirc",
+    "outCirc",
+    "inOutCirc",
+    "inExpo",
+    "outExpo",
+    "inOutExpo",
+    "inBounce",
+    "outBounce",
+    "inOutBounce",
+    "inBack",
+    "inBack(3.40316)",
+    "outBack",
+    "outBack(3.40316)",
+    "inOutBack",
+    "inOutBack(3.40316)",
+    "inElastic",
+    "inElastic(2, .6)",
+    "outElastic",
+    "outElastic(2, .6)",
+    "inOutElastic",
+    "inOutElastic(2, .6)",
+];
+---
+
+<astro-anime-js-demo
+    data-message={JSON.stringify(easeItems)}
+    class="pt-10 w-full max-w-1/2 mx-auto flex flex-col gap-y-8"
+>
+    {
+        easeItems.map((item, index) => (
+            <div class="w-full">
+                <div class="text-sm text-gray-600">
+                    <code>{item}</code>
+                </div>
+                <div class="relative mt-2 w-full h-10 border-x">
+                    <div class="absolute w-full h-0 border-t border-dashed top-1/2 -translate-y-1/2 -z-10" />
+                    <div
+                        class={`absolute top-0 left-0 bg-zinc-600 w-10 h-10 rounded anime-${index}`}
+                    />
+                </div>
+            </div>
+        ))
+    }
+</astro-anime-js-demo>
+
+<script>
+    import { animate } from "animejs";
+
+    class AstroAnimeJSDemo extends HTMLElement {
+        connectedCallback() {
+            const easeItems = JSON.parse(this.dataset.message || "[]");
+            easeItems.map((item: string, index: number) => {
+                animate(`.anime-${index}`, {
+                    left: "auto",
+                    right: 0,
+                    rotate: "1turn",
+                    duration: 2000,
+                    loop: true,
+                    ease: item,
+                });
+            });
+        }
+    }
+
+    customElements.define("astro-anime-js-demo", AstroAnimeJSDemo);
+</script>
