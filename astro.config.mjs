@@ -22,6 +22,10 @@ export default defineConfig({
     },
   }), mdx()],
 
+  image: {
+    responsiveStyles: true
+  },
+
   markdown: {
     rehypePlugins: [
       [
